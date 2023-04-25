@@ -1,0 +1,67 @@
+# Format Style Options - Created with Clang Power Tools
+---
+BasedOnStyle: Microsoft
+AccessModifierOffset: -4
+AlwaysBreakTemplateDeclarations: Yes
+BinPackParameters: false
+BraceWrapping: 
+  AfterCaseLabel: true
+BreakBeforeBraces: Allman
+ColumnLimit: 80
+FixNamespaceComments: false
+NamespaceIndentation: All
+PointerAlignment: Left
+SortIncludes: false
+
+#####################
+# Pending Additions #
+#####################
+
+###################
+# clang-format 12 #
+###################
+
+#BitFieldColonSpacing: BFCS_After
+#BreakBeforeConceptDeclarations: BBCDS_Always
+#EmptyLineBeforeAccessModifier: ELBAMS_Always
+
+###################
+# clang-format 13 #
+###################
+
+#ReferenceAlignment: RAS_Left
+
+###################
+# clang-format 14 #
+###################
+
+#PackConstructorInitializers: PCIS_CurrentLine
+#QualifierAlignment: ?
+#QualifierOrder: ?
+#SeparateDefinitionBlocks: SDS_Always
+
+#SpaceBeforeParens: Custom
+#SpaceBeforeParensOptions:
+  #AfterControlStatements: true
+  #AfterFunctionDefinitionName: true
+  #AfterRequiresInClause: true
+  #AfterRequiresInExpression: true
+
+###################
+# clang-format 15 #
+###################
+
+#InsertBraces: true
+#RequiresClausePosition: RCPS_OwnLine
+
+###################
+# clang-format 16 #
+###################
+
+#InsertNewlineAtEOF: true
+#IntegerLiteralSeparator: ?
+#LineEnding: LE_LF
+#RemoveSemicolon: ?
+#RequiresExpressionIndentation: REI_OuterScope
+
+...
