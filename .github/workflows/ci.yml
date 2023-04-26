@@ -50,7 +50,7 @@ jobs:
       run: cmake -B ${{github.workspace}}/build ${{matrix.config_flags}}
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.build_type}}
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Test
       working-directory: ${{github.workspace}}/build
