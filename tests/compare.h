@@ -1,5 +1,6 @@
 #pragma once
 
+#include <compare>
 #include <variant>
 
 enum class equality_result
