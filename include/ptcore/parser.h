@@ -3,6 +3,8 @@
 #include <string_view>
 #include <optional>
 #include <concepts>
+#include <array>
+#include <type_traits>
 
 namespace ptcore
 {
