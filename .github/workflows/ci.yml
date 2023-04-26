@@ -21,11 +21,12 @@ jobs:
             install_command: |
               brew install gcc@12 ninja binutils
               brew link --force binutils
-            config_flags: -G Ninja -D CMAKE_CXX_COMPILER=g++-12 -D CMAKE_BUILD_TYPE=env.BUILD_TYPE
+            build_type: ${{ env.BUILD_TYPE}}
+            config_flags: -G Ninja -D CMAKE_CXX_COMPILER=g++-12 -D CMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
           - os: macos-latest
             install_command: brew install gcc@12 ninja
-            config_flags: -G Ninja -D CMAKE_CXX_COMPILER=g++-12 -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            config_flags: -G Ninja -D CMAKE_CXX_COMPILER=g++-12 -D CMAKE_BUILD_TYPE=env.BUILD_TYPE
 
     runs-on: ${{ matrix.os }}
 
