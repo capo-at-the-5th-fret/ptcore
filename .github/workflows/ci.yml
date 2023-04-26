@@ -38,15 +38,15 @@ jobs:
       uses: Homebrew/actions/setup-homebrew@master
 
     - name: Install
-      if: ${{ matrix.install_command }}
-      run: ${{ matrix.install_command }}
+      if: matrix.install_command
+      run: matrix.install_command
 
     - name: Configure
-      if: ${{ matrix.config_flags }} == null
+      if: matrix.config_flags == null
       run: cmake -B ${{github.workspace}}/build
 
     - name: Configure (Custom)
-      if: ${{ matrix.config_flags }}
+      if: matrix.config_flags
       run: cmake -B ${{github.workspace}}/build ${{ matrix.config_flags }}
 
     - name: Build
