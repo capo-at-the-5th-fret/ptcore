@@ -5,11 +5,19 @@
 
 namespace
 {
+    // clang-format off
     // list of types that return true for the type trait
-    using ratio_type = std::ratio<1,2>;
+    using valid_is_ratio_types = std::tuple
+    <
+        std::ratio<1,2>
+    >;
 
-    using is_ratio_types =
-        easy::tuple_append_t<easy::test::primary_types, ratio_type>;
+    using is_ratio_test_types = easy::tuple_cat_t
+    <
+        easy::test::primary_types,
+        valid_is_ratio_types
+    >;
+    // clang-format on
 }
 
 TEST_CASE_TEMPLATE_DEFINE("is_ratio", TestType, is_ratio_test_id)
@@ -25,11 +33,13 @@ TEST_CASE_TEMPLATE_DEFINE("is_ratio", TestType, is_ratio_test_id)
         {
             CAPTURE(I);
 
-            constexpr bool expected = std::is_same_v
+            // clang-format off
+            constexpr bool expected = easy::tuple_contains_type_v
             <
                 std::remove_cv_t<T>,
-                ratio_type
+                valid_is_ratio_types
             >;
+            // clang-format on
 
             static_assert(is_ratio<T>::value == expected);
             static_assert(is_ratio_v<T> == expected);
@@ -37,8 +47,8 @@ TEST_CASE_TEMPLATE_DEFINE("is_ratio", TestType, is_ratio_test_id)
     }
     else
     {
-        static_assert(easy::always_false<TestType>::value == false);
-        static_assert(easy::always_false_v<TestType> == false);
+        static_assert(is_ratio<TestType>::value == false);
+        static_assert(is_ratio_v<TestType> == false);
     }
 }
-TEST_CASE_TEMPLATE_APPLY(is_ratio_test_id, is_ratio_types);
+TEST_CASE_TEMPLATE_APPLY(is_ratio_test_id, is_ratio_test_types);

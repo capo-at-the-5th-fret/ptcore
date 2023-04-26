@@ -91,15 +91,22 @@ TEST_CASE_FIXTURE(ptcore::test::parse_results_fixture, "parse_results")
 
 namespace
 {
+    // clang-format off
     // list of types that return true for the type trait
-    using parse_return_type = ptcore::parse_return_t<int>;
+    using valid_is_parse_return_type_types = std::tuple
+    <
+        ptcore::parse_return_t<int>
+    >;
 
-    using is_parse_return_types =
-        easy::tuple_append_t<easy::test::primary_types, parse_return_type>;
+    using is_parse_return_type_test_types = easy::tuple_cat_t
+    <
+        easy::test::primary_types,
+        valid_is_parse_return_type_types
+    >;
+    // clang-format on
 }
 
-TEST_CASE_TEMPLATE_DEFINE("is_parse_return_type", TestType,
-    is_parse_return_type_test_id)
+TEST_CASE_TEMPLATE_DEFINE("detail::is_parse_return_type", TestType, is_parse_return_type_test_id)
 {
     using ptcore::detail::is_parse_return_type;
     using ptcore::detail::is_parse_return_type_v;
@@ -112,8 +119,13 @@ TEST_CASE_TEMPLATE_DEFINE("is_parse_return_type", TestType,
         {
             CAPTURE(I);
 
-            constexpr bool expected =
-                std::is_same_v<T, parse_return_type>;
+            // clang-format off
+            constexpr bool expected = easy::tuple_contains_type_v
+            <
+                T,
+                valid_is_parse_return_type_types
+            >;
+            // clang-format on
 
             static_assert(is_parse_return_type<T>::value == expected);
             static_assert(is_parse_return_type_v<T> == expected);
@@ -121,11 +133,11 @@ TEST_CASE_TEMPLATE_DEFINE("is_parse_return_type", TestType,
     }
     else
     {
-        static_assert(!easy::always_false<TestType>::value);
-        static_assert(!easy::always_false_v<TestType>);
+        static_assert(is_parse_return_type<TestType>::value == false);
+        static_assert(is_parse_return_type_v<TestType> == false);
     }
 }
-TEST_CASE_TEMPLATE_APPLY(is_parse_return_type_test_id, is_parse_return_types);
+TEST_CASE_TEMPLATE_APPLY(is_parse_return_type_test_id, is_parse_return_type_test_types);
 
 namespace
 {
