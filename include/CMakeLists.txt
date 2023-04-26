@@ -27,6 +27,7 @@ target_sources(ptcore
         FILE_SET HEADERS
         FILES
             ptcore/parser.h
+            ptcore/ratio.h
             ptcore/text_literals.h
 )
 

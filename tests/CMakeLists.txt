@@ -29,6 +29,7 @@ add_executable(testrunner
     main.cpp
 
     parser_tests.cpp
+    ratio_tests.cpp
     text_literals_tests.cpp
 
 )
