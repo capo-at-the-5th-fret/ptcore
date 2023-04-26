@@ -28,10 +28,12 @@ add_executable(testrunner
 
     main.cpp
 
+    parser_tests.cpp
     text_literals_tests.cpp
 
 )
 
+target_include_directories(testrunner PRIVATE "${CMAKE_SOURCE_DIR}/")
 target_link_libraries(testrunner
     PRIVATE
         doctest::doctest
