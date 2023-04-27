@@ -6,16 +6,13 @@ on:
   pull_request:
     branches: [ "main", "fix*" ]
 
-#env:
-  # [ Debug, Release, MinSizeRel, RelWithDebInfo ]
-  #BUILD_TYPE: Release
-
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        # [ Debug, Release, MinSizeRel, RelWithDebInfo ]
         build_type: [Release]
         include:
           - os: ubuntu-latest
